@@ -1,5 +1,5 @@
 ## Project Requirements
-- Ruby 3.3.2
+- Ruby 3.2.2
 - Rails 7.0
 
 ## Setup
