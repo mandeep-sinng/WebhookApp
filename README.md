@@ -1,24 +1,16 @@
-# README
+## Project Requirements
+- Ruby 3.3.2
+- Rails 7.0
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
+- bundle install
+- rails db:setup
+- rails s
 
-Things you may want to cover:
+## Testing
+- Goto localhost:300/admin
+- Create/Update Data Entries
+- Observer the 3rd party APIs (webhook) are being called on each request
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Configuration
+- 3rd party API are given in config/third_party_apis.yml
