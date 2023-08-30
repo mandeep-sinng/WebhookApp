@@ -1,0 +1,2 @@
+class ApiLink < ApplicationRecord
+end

@@ -12,9 +12,11 @@
 - bundle exec sidekiq
 
 ## Testing
-- Goto localhost:300/admin
+- Goto localhost:3000/admin
+- Add ApiLinks
 - Create/Update Data Entries
-- Observe the 3rd party APIs (webhook) are being called on each request
+- Observe the 3rd party APIs (webhook) are being called on each request (through rails logs)
+- Observe the Sidekiq UI to see the jobs are running localhost:3000/sidekiq
 
 ## Configuration
 - 3rd party API are stored in ApiLinks Table
