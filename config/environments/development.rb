@@ -33,9 +33,6 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  third_party_apis = YAML.load(File.read(Rails.root + 'config' + 'third_party_apis.yml'))[Rails.env]
-  config.third_party_apis = third_party_apis
-
   config.log_level = :warn
 
   # Store uploaded files on the local file system (see config/storage.yml for options).

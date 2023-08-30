@@ -3,15 +3,10 @@ module Admin
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
-    def update
-      super
-      notify_third_party_apis(resource_params)
-    end
-
-    def create
-      super
-      notify_third_party_apis(resource_params)
-    end
+    # def update
+    #   super
+    #   send_foo_updated_email(requested_resource)
+    # end
 
     # Override this method to specify custom lookup behavior.
     # This will be used to set the resource for the `show`, `edit`, and `update`
@@ -48,20 +43,22 @@ module Admin
     # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information
 
-    def notify_third_party_apis(data_entry)
-      config = Rails.application.config
-      config.third_party_apis.each do |endpoint|
-        conn = Faraday.new(url: endpoint)
-        payload = { name: data_entry[:name], data: data_entry[:data] }.to_json
-    
-        response = conn.post do |req|
-          req.headers['Content-Type'] = 'application/json'
-          req.body = payload
-        end
-    
-        Rails.logger.warn("Webhook to #{endpoint} returned status #{response.status}")
-      end
+
+    def update
+      super
+      notify_third_party_apis(resource_params)
     end
-  
+    
+    def create
+      super
+      notify_third_party_apis(resource_params)
+    end
+
+    def notify_third_party_apis(data_entry)
+      ApiLink.all.each do |api|
+        Rails.logger.warn("Scheduling a job to run #{api.title} Webhook")
+        WebhookJob.perform_async(data_entry.to_json, api.id)
+      end
+    end  
   end
 end
