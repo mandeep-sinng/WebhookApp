@@ -12,6 +12,6 @@ class WebhookJob
       req.body = payload
     end
       
-    Rails.logger.warn("Webhook to #{api.title} returned status #{response.status}")
+    Rails.logger.warn("Webhook to #{api.title} returned status #{response.status}")  
   end
 end
